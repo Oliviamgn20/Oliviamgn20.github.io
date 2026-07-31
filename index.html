@@ -1,129 +1,510 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>My space</title>
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: linear-gradient(to right, #777777, #ffffff);
-      font-family: Arial, sans-serif;
-    }
-    .accueil {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-    .logos img{
-    width: 30px;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My space</title>
 
-}
-.logos {
-    position: 10px;
-    top: 70px;
-    right: auto;
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f8f9fa;
+    --surface-card: #ffffff;
+    
+    --border: #eaecf0;
+    --border-accent: #800020;
+    
+    --text-dark: #0f172a;
+    --text-muted: #475569;
+    --text-light: #ffffff;
+    
+    /* Bordeaux Pur */
+    --bordeaux: #800020;
+    --bordeaux-hover: #5e0017;
+    --bordeaux-subtle: #fbf2f4;
+  }
+
+  * { 
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter' , system-ui, -apple-system, sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text-dark);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  ::selection { 
+    background: var(--bordeaux); 
+    color: var(--text-light); 
+  }
+
+  /* ---------- Header / Navigation ---------- */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
-    gap: 5px;
-}
-    h1 {
-      border: 3px solid black;
-      font-size: 60px;
-      color: black;
-      position: relative;
-      top: -70px;
-      padding: 20px 40px;
-    }
-    footer {
-        display: flex;
-        justify-content: space-between;
-        padding: 20px 15px ;
-        marging-top: -20px;
-        align-items: 50px;
-    }
-    .tech {
-        flex: auto;
-        padding: 5px;
-        margin: 10px;
-        box-shadow: rgb(116, 112, 112);
-        border-radius: 5px;
-        text-align: center;
-        background-color: rgb(190, 186, 186);
-        width: 30px;
-        margin-bottom: 5px;
-        padding-bottom: 10px;
-        transform: translateY(-20px);
-       
-}
-    
-.pjt {
-    flex: auto;
-        padding: 5px;
-        margin: 10px;
-        box-shadow: rgb(116, 112, 112);
-        border-radius: 5px;
-        text-align: center;
-        background-color: rgb(190, 186, 186);
-        padding-bottom: 10px;
-        width: 30px;
-        margin-bottom: 5px;
-        transform: translateY(-20px);
-    
-    
-}
-.vlr {
-    flex: auto;
-        padding: 5px;
-        margin: 10px;
-        box-shadow: rgb(116, 112, 112);
-        border-radius: 5px;
-        text-align: center;
-        background-color: rgb(190, 186, 186);
-        width: 30px;
-        margin-bottom: 5px;
-        transform: translateY(-20px);
-        opacity: 1;
-      
-}
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8vw;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+  }
 
-    
-  </style>
+  .logo {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: -0.03em;
+    color: var(--text-dark);
+  }
+
+  .logo span { color: var(--bordeaux); }
+
+  .icons {
+    display: flex;
+    gap: 12px;
+  }
+
+  .icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+  }
+
+  .icons a:hover {
+    border-color: var(--bordeaux);
+    background: var(--bordeaux-subtle);
+    transform: translateY(-2px);
+  }
+
+  .icons img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+  }
+
+  /* ---------- Hero Section ---------- */
+  .accueil {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 140px 8vw 80px;
+    background: var(--bg);
+  }
+
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--bordeaux);
+    font-weight: 600;
+    font-size: 0.825rem;
+    margin-bottom: 24px;
+    padding: 8px 16px;
+    background: var(--bordeaux-subtle);
+    border-radius: 30px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .badge::after {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background: var(--bordeaux);
+    border-radius: 50%;
+    margin-left: 10px;
+    animation: blink 1.2s infinite;
+  }
+
+  @keyframes blink { 
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; } 
+  }
+
+  h1 {
+    font-weight: 800;
+    font-size: clamp(2.8rem, 6.5vw, 5rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: var(--text-dark);
+    margin-bottom: 24px;
+  }
+
+  h1 span {
+    color: var(--bordeaux);
+  }
+
+  .role {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    color: var(--text-muted);
+    max-width: 640px;
+    margin-bottom: 40px;
+    font-weight: 400;
+  }
+
+  .cta-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.25s ease;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: var(--bordeaux);
+    color: var(--text-light);
+    border: 1px solid var(--bordeaux);
+    box-shadow: 0 4px 14px rgba(128, 0, 32, 0.2);
+  }
+
+  .btn-primary:hover {
+    background: var(--bordeaux-hover);
+    border-color: var(--bordeaux-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(128, 0, 32, 0.3);
+  }
+
+  .btn-secondary {
+    background: var(--surface);
+    color: var(--text-dark);
+    border: 1px solid var(--border);
+  }
+
+  .btn-secondary:hover {
+    background: var(--bg);
+    border-color: var(--bordeaux);
+    color: var(--bordeaux);
+    transform: translateY(-2px);
+  }
+
+  /* ---------- Block Sections ---------- */
+  section.block {
+    padding: 100px 8vw;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    color: var(--bordeaux);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 28px;
+  }
+
+  .about-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 44px;
+    border-radius: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  }
+
+  .about-card h3 {
+    font-weight: 700;
+    font-size: 1.6rem;
+    letter-spacing: -0.02em;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+  }
+
+  .about-card p {
+    color: var(--text-muted);
+    margin-bottom: 18px;
+    font-size: 1.05rem;
+  }
+
+  .about-card strong { 
+    color: var(--bordeaux); 
+    font-weight: 600;
+  }
+
+  .quote-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--bordeaux);
+    color: var(--text-light);
+    border: none;
+    box-shadow: 0 10px 30px rgba(128, 0, 32, 0.25);
+  }
+
+  .quote-card .section-label {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .quote-card h3 {
+    color: var(--text-light);
+  }
+
+  blockquote {
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.95);
+    border-left: 3px solid var(--text-light);
+    padding-left: 20px;
+    margin: 20px 0 32px 0;
+    font-size: 1.15rem;
+    line-height: 1.5;
+  }
+
+  .status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    background: #ffffff;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ---------- Banner Tagline ---------- */
+  .tagline {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 80px 8vw;
+    text-align: center;
+  }
+
+  .tagline p {
+    font-weight: 700;
+    font-size: clamp(1.4rem, 3.2vw, 2.2rem);
+    letter-spacing: -0.03em;
+    max-width: 900px;
+    margin: 0 auto;
+    color: var(--text-dark);
+  }
+
+  .tagline p span { 
+    color: var(--bordeaux);
+    position: relative;
+    display: inline-block;
+  }
+
+  /* ---------- Cards Grid ---------- */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    padding: 90px 8vw 120px;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    border-color: var(--bordeaux);
+    box-shadow: 0 12px 30px rgba(128, 0, 32, 0.08);
+  }
+
+  .card .num {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--bordeaux);
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  .card h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+    color: var(--text-dark);
+  }
+
+  .card p {
+    color: var(--text-muted);
+    font-size: 0.975rem;
+  }
+
+  .card a.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--bordeaux);
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-top: 16px;
+    transition: gap 0.2s ease;
+  }
+
+  .card a.project-link:hover {
+    gap: 10px;
+  }
+
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .tag {
+    font-size: 0.8rem;
+    font-weight: 600;
+    background: var(--bordeaux-subtle);
+    color: var(--bordeaux);
+    padding: 6px 12px;
+    border-radius: 8px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+    padding: 40px 8vw;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .accueil { padding-top: 130px; }
+  }
+</style>
 </head>
 <body>
-    <div class="logos">
-    
-     <img src="link.jpg" alt="logo X">
 
-     <a href="https://www.linkedin.com/in/olivia-mouiche-650ba538a?utm_source=share_via&utm_content=profile&utm_medium=member_ios">
-       <img src="linke.jpg" alt="logo linkedin">
-     </a>
-
-    <a href="https://github.com/Oliviamgn20">
-     <img src="git.jpg" alt="logo git">
+  <!-- Navigation -->
+  <header>
+    <div class="logo">M<span>MO</span></div>
+    <div class="icons">
+      <a href="https://www.linkedin.com/in/olivia-mouiche-650ba538a?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <img src="linkedin.jpg" alt="LinkedIn">
       </a>
-
-    <a href="https://www.instagram.com/livix_mgn?igsh=bWNpMzJ6ZHNndWN6&utm_source=qr">
-     <img src="insta.jpg" alt=" logo insta">
+      <a href="https://github.com/Oliviamgn20" target="_blank" rel="noopener" aria-label="GitHub">
+        <img src="logogh.jpg" alt="GitHub">
       </a>
-  </div>
+      <a href="https://www.instagram.com/livix_mgn?igsh=bWNpMzJ6ZHNndWN6&utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram">
+        <img src="link.jpg" alt="Instagram">
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
   <section class="accueil">
-    <h1>Magnerou's Portfolio</h1>
+    <h1>Magnerou's<br><span>Portfolio</span></h1>
+    <p class="role">Ambitieuse et curieuse, animée par une forte envie d'apprendre et de progresser. Convaincue que chaque expérience est une occasion de grandir, je cherche constamment à développer mes compétences, à avoir un impact positif autour de moi et à construire un avenir fondé sur l'excellence et l'innovation.</p>
+    
+    <div class="cta-group">
+      <a href="oliviamagnerou@icloud;com" class="btn btn-secondary">Me contacter</a>
+    </div>
   </section>
-  <footer>
-    <div class="tech">
-        <h2>03<br>Technologies</h2>
-        <p>HTML, CSS, JAVASCRIPT</p>
+
+  <!-- Section À Propos -->
+  <section class="block">
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="section-label">Section</div>
+        <h3>Ingénierie & Développement Web</h3>
+        <p>
+         Étudiante en <strong>Génie Logiciel</strong>, actuellement en stage académique chez Nuxcine, où je développe mes compétences dans le domaine du numérique et des nouvelles technologies. Passionnée par la disruption, je suis une personne pragmatique, créative et persévérante. J'aime me démarquer. J’identifie des problèmes concrets pour y apporter des réponses adaptées et pérennes.
+Orientée vers l'excellence et la concrétisation des idées, je façonne des outils performants au service des utilisateurs.
+        </p>
+        <p>
+          Ce qui me passionne au quotidien, c'est de structurer une logique logicielle claire pour résoudre des problématiques complexes et construire des solutions pérennes.
+        </p>
+      </div>
+
+      <div class="about-card quote-card">
+        <div>
+          <div class="section-label"> Perception</div>
+          <h3>Ma vision</h3>
+          <blockquote>« Designing digital solutions that combine simplicity, performance, and elegance. »</blockquote>
+        </div>
+        <div class="status">
+          <span class="dot"></span> Disponible pour projets et opportunités
+        </div>
+      </div>
     </div>
-    <div class="pjt">
-        <h2>01 <br>Projet</h2>
-        <p>ZEUNETWORK.COM</p>
-    </div>   
-    <div class="vlr">
-        <h2>03 <br>Valeurs</h2>
-        <p>Pragmatique, Curieuse, Motivée</p>
+  </section>
+
+  <!-- Bannière Tagline -->
+  <div class="tagline">
+    <p>I don't just write code — I <span>solve complex problems</span>, one project at a time.</p>
+  </div>
+
+  <!-- Cartes d'informations -->
+  <div class="cards-grid">
+    <div class="card">
+      <span class="num">EN COURS</span>
+      <h4>Technologies en apprentissages</h4>
+      <p>Actuellement, je développe progressivement mes compétences en <strong>JavaScript, TypeScript, TailwindCSS, React</strong> et <strong>React Native</strong>. <p>J'approfondis ces technologies afin de maîtriser le développement d'applications web modernes, d'améliorer mes pratiques de programmation et de concevoir des interfaces interactives, performantes et évolutives.</p></p>
     </div>
-  </footer>
-</body>
-</html>
+    <div class="card">
+      <span class="num"> RÉALISATION</span>
+      <h4>Plateforme Web</h4>
+      <p>Développement frontend et intégration d'applications métier.</p>
+      <a href="https://www.zeunetwork.com" target="_blank" rel="noopener" class="project-link">
+        zeunetwork.com ↗
+      </a>
+    </div>
+
+    <div class="card">
+      <span class="num">ATOUTS</span>
+      <h4>Valeurs Pro</h4>
+      <p>Pragmatisme, rigueur d'analyse, curiosité constante et sensibilité portée sur l'expérience utilisateur.</p>
+    </div>
+  </div>
